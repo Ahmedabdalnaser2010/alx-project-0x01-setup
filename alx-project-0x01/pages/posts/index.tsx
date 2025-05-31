@@ -27,8 +27,8 @@ const Posts: React.FC<{ posts: PostProps[] }> = ({ posts }) => {
                     </button>
                 </div>
                 <div className="grid grid-cols-3 gap-2">
-                    {allPosts?.map((post: PostProps, key: number) => (
-                        <PostCard key={key} {...post} />
+                    {allPosts?.map((post: PostProps) => (
+                        <PostCard key={post.id} {...post} />
                     ))}
                 </div>
             </main>
@@ -40,18 +40,18 @@ const Posts: React.FC<{ posts: PostProps[] }> = ({ posts }) => {
                 />
             )}
         </div>
-    )
-}
+    );
+};
 
 export async function getStaticProps() {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts")
-    const posts = await response.json()
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const posts = await response.json();
 
     return {
         props: {
-            posts
-        }
-    }
+            posts,
+        },
+    };
 }
 
 export default Posts;
